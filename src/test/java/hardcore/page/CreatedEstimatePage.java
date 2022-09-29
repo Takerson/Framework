@@ -5,17 +5,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CreatedEstimate extends AbstractPage {
-    String textWithoutRegex;
-    public static String priceInCalculator;
+public class CreatedEstimatePage extends AbstractPage {
+    private String textWithoutRegex;
+    private static String priceInCalculator;
 
+    public static String getPriceInCalculator() {
+        return priceInCalculator;
+    }
 
     // get data about estimate
     @FindBy(xpath = "//*[contains(text(),'Total Estimated Cost:')]")
@@ -34,7 +35,7 @@ public class CreatedEstimate extends AbstractPage {
     @FindBy(xpath = "//iframe[@id='myFrame']")
     private WebElement frame;
 
-    public CreatedEstimate(WebDriver driver){
+    public CreatedEstimatePage(WebDriver driver){
         super(driver);
         PageFactory.initElements(driver,this);
     }
@@ -46,7 +47,7 @@ public class CreatedEstimate extends AbstractPage {
         return new MailFor10MinHomePage(driver);
     }
 
-    public CreatedEstimate clickOnEmailButton(){
+    public CreatedEstimatePage clickOnEmailButton(){
         webElementWaitToBeVisible(parentFrame);
         driver.switchTo().frame(parentFrame);
         webElementWaitToBeVisible(frame);
@@ -59,7 +60,7 @@ public class CreatedEstimate extends AbstractPage {
         return this;
     }
 
-    public CreatedEstimate enterACreatedEmailAndSendToEmail(String email){
+    public CreatedEstimatePage enterACreatedEmailAndSendToEmail(String email){
         webElementWaitToBeVisible(emailInputField);
         emailInputField.sendKeys(email);
         webElementWaitToBeClickable(sendEmailButton);
@@ -67,9 +68,9 @@ public class CreatedEstimate extends AbstractPage {
         return this;
     }
 
-    public GeneratedEmail switchToEmailTab(){
+    public GeneratedEmailPage switchToEmailTab(){
         driver.switchTo().window(tab.get(1));
-        return new GeneratedEmail(driver);
+        return new GeneratedEmailPage(driver);
     }
 
     public String regExPrice(){
@@ -81,13 +82,5 @@ public class CreatedEstimate extends AbstractPage {
             priceInCalculator = textWithoutRegex.substring(start, end);
         }
         return priceInCalculator;
-    }
-
-    private void webElementWaitToBeVisible(WebElement webElement){
-        new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOf(webElement));
-    }
-
-    private void webElementWaitToBeClickable(WebElement webElement){
-        new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(webElement));
     }
 }

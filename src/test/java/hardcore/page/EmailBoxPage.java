@@ -4,10 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class EmailBox extends AbstractPage{
+public class EmailBoxPage extends AbstractPage{
 
     @FindBy(id = "refresh")
     private WebElement refreshButton;
@@ -17,23 +15,21 @@ public class EmailBox extends AbstractPage{
     private WebElement frame;
 
 
-    public EmailBox(WebDriver driver){
+    public EmailBoxPage(WebDriver driver){
         super(driver);
         PageFactory.initElements(driver,this);
     }
 
     public void refreshEmailBox(){
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(refreshButton));
+        webElementWaitToBeClickable(refreshButton);
         refreshButton.click();
     }
 
     public String getEstimatedCostPerMonthFromEmailBox(){
         refreshEmailBox();
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOf(frame));
+        webElementWaitToBeVisible(frame);
         driver.switchTo().frame(frame);
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOf(estimatedMonthlyCost));
-        String s = estimatedMonthlyCost.getText().replaceAll("[a-zA-Z\\s]","").trim();
-        return s;
+        webElementWaitToBeVisible(estimatedMonthlyCost);
+        return estimatedMonthlyCost.getText().replaceAll("[a-zA-Z\\s]","").trim();
     }
-
 }

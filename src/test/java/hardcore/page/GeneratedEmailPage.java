@@ -7,8 +7,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class GeneratedEmail extends AbstractPage {
-    public static String emailAddress;
+public class GeneratedEmailPage extends AbstractPage {
+    private static String emailAddress;
+
+    public static String getEmailAddress() {
+        return emailAddress;
+    }
 
     @FindBy(id = "egen")
     private WebElement copyAGeneratedEmailAddressButton;
@@ -16,20 +20,20 @@ public class GeneratedEmail extends AbstractPage {
     private WebElement checkEmailBoxButton;
 
 
-    public GeneratedEmail(WebDriver driver){
+    public GeneratedEmailPage(WebDriver driver){
         super(driver);
         PageFactory.initElements(driver,this);
     }
 
-    public CreatedEstimate copyAGeneratedEmailAddressAndSwitchToCalculatorPage(){
-        new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.visibilityOf(copyAGeneratedEmailAddressButton));
+    public CreatedEstimatePage copyAGeneratedEmailAddressAndSwitchToCalculatorPage(){
+        webElementWaitToBeVisible(copyAGeneratedEmailAddressButton);
         emailAddress = copyAGeneratedEmailAddressButton.getText();
         driver.switchTo().window(tab.get(0));
-        return new CreatedEstimate(driver);
+        return new CreatedEstimatePage(driver);
     }
 
-    public EmailBox checkEmailBox(){
+    public EmailBoxPage checkEmailBox(){
         checkEmailBoxButton.click();
-        return new EmailBox(driver);
+        return new EmailBoxPage(driver);
     }
 }

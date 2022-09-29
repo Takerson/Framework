@@ -120,10 +120,11 @@ public class GoogleCalculatorPage extends AbstractPage{
         return this;
     }
 
-    public CreatedEstimate createAnEstimate(){
+    public CreatedEstimatePage createAnEstimate(){
         addToEstimateButton.click();
-        return new CreatedEstimate(driver);
+        return new CreatedEstimatePage(driver);
     }
+
 
     public void webElementWaitToBeClickableWithClick(WebElement webElement){
         new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(webElement));

@@ -21,8 +21,8 @@ public class MailFor10MinHomePage extends AbstractPage{
         return this;
     }
 
-    public GeneratedEmail generateAnEmail(){
+    public GeneratedEmailPage generateAnEmail(){
         generateRandomMail.click();
-        return new GeneratedEmail(driver);
+        return new GeneratedEmailPage(driver);
     }
 }
