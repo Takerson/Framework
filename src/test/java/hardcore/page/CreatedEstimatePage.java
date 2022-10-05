@@ -21,6 +21,19 @@ public class CreatedEstimatePage extends AbstractPage {
     // get data about estimate
     @FindBy(xpath = "//*[contains(text(),'Total Estimated Cost:')]")
     private WebElement priceForMonth;
+    @FindBy(xpath = "//*[@id='compute']/md-list/div/div/div/span/span")
+    private WebElement numberOfInstance;
+    @FindBy(xpath = "//div[contains(text(),'Region: ')]")
+    private WebElement region;
+    @FindBy(xpath = "//div[contains(text(),'Instance type: ')]")
+    private WebElement instanceType;
+    @FindBy(xpath = "//div[contains(text(),'Provisioning model: ')]")
+    private WebElement vmClass;
+    @FindBy(xpath = "//div[contains(text(),'Local SSD: ')]")
+    private WebElement localSSD;
+    @FindBy(xpath = "//div[contains(text(),'Commitment term')]")
+    private WebElement committedTerm;
+
 
     // sending data about estimate to email
     @FindBy(xpath = "//button[contains(text(),'Email')]")
@@ -37,7 +50,6 @@ public class CreatedEstimatePage extends AbstractPage {
 
     public CreatedEstimatePage(WebDriver driver){
         super(driver);
-        PageFactory.initElements(driver,this);
     }
 
     public MailFor10MinHomePage createNewTabAndRotateToIt(){
@@ -82,5 +94,43 @@ public class CreatedEstimatePage extends AbstractPage {
             priceInCalculator = textWithoutRegex.substring(start, end);
         }
         return priceInCalculator;
+    }
+
+
+
+
+    public String getNumberOfInstance() {
+        webElementWaitToBeClickable(numberOfInstance);
+        return numberOfInstance.getText().trim();
+    }
+
+    public String getRegion() {
+        webElementWaitToBeClickable(region);
+        return region.getText().trim();
+    }
+
+    public String getInstanceType() {
+        webElementWaitToBeClickable(instanceType);
+        return instanceType.getText().trim();
+    }
+
+    public String getVmClass() {
+        webElementWaitToBeClickable(vmClass);
+        return vmClass.getText().trim();
+    }
+
+    public String getLocalSSD() {
+        webElementWaitToBeClickable(localSSD);
+        return localSSD.getText().trim();
+    }
+
+    public String getPriceForMonth() {
+        webElementWaitToBeClickable(priceForMonth);
+        return priceForMonth.getText().trim();
+    }
+
+    public String getCommittedTerm() {
+        webElementWaitToBeClickable(committedTerm);
+        return committedTerm.getText().trim();
     }
 }

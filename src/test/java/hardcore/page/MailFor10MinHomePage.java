@@ -3,7 +3,6 @@ package hardcore.page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class MailFor10MinHomePage extends AbstractPage{
     private static final String MAIL_FOR_10_MIN_PAGE_URL = "https://yopmail.com/ ";
@@ -13,7 +12,6 @@ public class MailFor10MinHomePage extends AbstractPage{
 
     public MailFor10MinHomePage(WebDriver driver){
         super(driver);
-        PageFactory.initElements(driver,this);
     }
 
     public MailFor10MinHomePage openMailGeneratorPage(){

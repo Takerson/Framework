@@ -3,7 +3,6 @@ package hardcore.page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class GoogleSearchListPage extends AbstractPage{
 
@@ -12,12 +11,11 @@ public class GoogleSearchListPage extends AbstractPage{
 
     public GoogleSearchListPage(WebDriver driver){
         super(driver);
-        PageFactory.initElements(driver,this);
     }
 
-    public GoogleCalculatorPage selectPricingCalculatorPageFromSearchList(){
+    public GoogleSearchListPage selectPricingCalculatorPageFromSearchList(){
         webElementWaitToBeClickable(chooseThePrisingCalculatorPageFromSearchList);
         chooseThePrisingCalculatorPageFromSearchList.click();
-        return new GoogleCalculatorPage(driver);
+        return this;
     }
 }

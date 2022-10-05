@@ -19,25 +19,32 @@ public class TestListener implements ITestListener {
     private Logger log = LogManager.getRootLogger();
 
     public void onTestStart(ITestResult iTestResult) {
+        System.out.println(iTestResult.getName() + " test started");
     }
 
     public void onTestSuccess(ITestResult iTestResult) {
     }
 
     public void onTestFailure(ITestResult iTestResult) {
+        System.out.println(iTestResult.getName() + " test failure");
         saveScreenshot();
     }
 
     public void onTestSkipped(ITestResult iTestResult) {
+        System.out.println(iTestResult.getName() + " test skipped");
     }
 
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
+        System.out.println(iTestResult.getName() + " test failure but within success percentage");
+        saveScreenshot();
     }
 
     public void onStart(ITestContext iTestContext) {
+        System.out.println("The project is up and running");
     }
 
     public void onFinish(ITestContext iTestContext) {
+        System.out.println("Project finished");
     }
 
     private void saveScreenshot(){

@@ -1,11 +1,9 @@
 package hardcore.test;
 
 import hardcore.model.Calculator;
-import hardcore.page.CreatedEstimatePage;
-import hardcore.page.EmailBoxPage;
-import hardcore.page.GeneratedEmailPage;
-import hardcore.page.GoogleHomePage;
+import hardcore.page.*;
 import hardcore.services.CalculatorCreator;
+import hardcore.services.SetUpAnEstimate;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -13,22 +11,17 @@ public class GoogleCloudPrisingCalculatorTest extends CommonConditions {
     private EmailBoxPage emailBox;
     private static final String SEARCH_TEXT = "Google Cloud Platform Pricing Calculator";
 
-    @Test
-    public void createNewEstimateAnd() {
+    @Test (description = "Create an estimate on the Google Cloud Pricing Calculator page. And compare " +
+            "the price of an estimate from the Google Calculator page and the Email Box page")
+    public void createNewEstimateAndCompareThePrice() {
         Calculator calculator = CalculatorCreator.createEstimate();
-        emailBox = new GoogleHomePage(driver)
+        GoogleSearchListPage googleSearchListPage = new GoogleHomePage(driver)
                 .openPage()
                 .inputTextInSearchField(SEARCH_TEXT)
-                .selectPricingCalculatorPageFromSearchList()
-                .setUpNumberOfInstance(calculator)
-                .selectMachineType()
-                .selectMachine(calculator)
-                .addGPU()
-                .selectGpuType(calculator)
-                .setUpNumberOfGPUs(calculator)
-                .selectLocalSSD(calculator)
-                .choosingADatacenterLocal(calculator)
-                .selectCommittedUsageDate(calculator)
+                .selectPricingCalculatorPageFromSearchList();
+        GoogleCalculatorPage setUpAnEstimate = new SetUpAnEstimate(driver)
+                .setUpAnEstimate(calculator);
+        emailBox = setUpAnEstimate
                 .createAnEstimate()
                 .createNewTabAndRotateToIt()
                 .openMailGeneratorPage()
@@ -38,6 +31,7 @@ public class GoogleCloudPrisingCalculatorTest extends CommonConditions {
                 .enterACreatedEmailAndSendToEmail(GeneratedEmailPage.getEmailAddress())
                 .switchToEmailTab()
                 .checkEmailBox();
-        Assert.assertEquals(emailBox.getEstimatedCostPerMonthFromEmailBox(), CreatedEstimatePage.getPriceInCalculator());
+        Assert.assertEquals(emailBox.getEstimatedCostPerMonthFromEmailBox(), CreatedEstimatePage.getPriceInCalculator(),
+                "the price of the estimate in the \"Calculator\" and in the \"Email\" is different ");
     }
 }

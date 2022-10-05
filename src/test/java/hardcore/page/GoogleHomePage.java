@@ -3,7 +3,6 @@ package hardcore.page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class GoogleHomePage extends AbstractPage {
     private static final String HOME_PAGE_URL = "https://cloud.google.com/";
@@ -15,7 +14,6 @@ public class GoogleHomePage extends AbstractPage {
 
     public GoogleHomePage(WebDriver driver){
         super(driver);
-        PageFactory.initElements(driver,this);
     }
 
     public GoogleHomePage openPage(){
