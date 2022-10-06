@@ -3,6 +3,8 @@ package hardcore.page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class EmailBoxPage extends AbstractPage{
 
@@ -32,6 +34,7 @@ public class EmailBoxPage extends AbstractPage{
         refreshButton.click();
         webElementWaitToBeVisible(frame);
         driver.switchTo().frame(frame);
+        new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeSelected(estimatedMonthlyCost));
         webElementWaitToBeVisible(estimatedMonthlyCost);
         return estimatedMonthlyCost.getText().replaceAll("[a-zA-Z\\s]","").trim();
     }
