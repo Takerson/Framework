@@ -18,17 +18,18 @@ public class EmailBoxPage extends AbstractPage{
         super(driver);
     }
 
-    public void refreshEmailBox(){
+    public EmailBoxPage refreshEmailBox(){
         webElementWaitToBeVisible(refreshButton);
         webElementWaitToBeClickable(refreshButton);
         refreshButton.click();
         webElementWaitToBeClickable(refreshButton);
         refreshButton.click();
+        return this;
     }
 
     public String getEstimatedCostPerMonthFromEmailBox(){
         webElementWaitToBeClickable(refreshButton);
-        refreshEmailBox();
+        refreshButton.click();
         webElementWaitToBeVisible(frame);
         driver.switchTo().frame(frame);
         webElementWaitToBeVisible(estimatedMonthlyCost);

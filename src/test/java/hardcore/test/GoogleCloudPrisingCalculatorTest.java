@@ -30,7 +30,8 @@ public class GoogleCloudPrisingCalculatorTest extends CommonConditions {
                 .clickOnEmailButton()
                 .enterACreatedEmailAndSendToEmail(GeneratedEmailPage.getEmailAddress())
                 .switchToEmailTab()
-                .checkEmailBox();
+                .checkEmailBox()
+                .refreshEmailBox();
         Assert.assertEquals(emailBox.getEstimatedCostPerMonthFromEmailBox(), CreatedEstimatePage.getPriceInCalculator(),
                 "the price of the estimate in the \"Calculator\" and in the \"Email\" is different ");
     }
