@@ -31,6 +31,8 @@ public class GeneratedEmailPage extends AbstractPage {
     public EmailBoxPage checkEmailBox(){
         webElementWaitToBeClickable(checkEmailBoxButton);
         checkEmailBoxButton.click();
+        webElementWaitToBeClickable(checkEmailBoxButton);
+        checkEmailBoxButton.click();
         return new EmailBoxPage(driver);
     }
 }
