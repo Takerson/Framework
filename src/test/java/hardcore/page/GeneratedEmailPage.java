@@ -13,7 +13,7 @@ public class GeneratedEmailPage extends AbstractPage {
 
     @FindBy(id = "egen")
     private WebElement copyAGeneratedEmailAddressButton;
-    @FindBy(xpath = "//button[@onclick = 'egengo();']")
+    @FindBy(xpath = "//button[@id='refresh']")
     private WebElement checkEmailBoxButton;
 
 
