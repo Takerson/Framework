@@ -13,7 +13,7 @@ public class GeneratedEmailPage extends AbstractPage {
 
     @FindBy(id = "egen")
     private WebElement copyAGeneratedEmailAddressButton;
-    @FindBy(xpath = "//button[@id='refresh']")
+    @FindBy(xpath = "//button[@onclick = 'egengo();']")
     private WebElement checkEmailBoxButton;
 
 
@@ -29,8 +29,6 @@ public class GeneratedEmailPage extends AbstractPage {
     }
 
     public EmailBoxPage checkEmailBox(){
-        webElementWaitToBeClickable(checkEmailBoxButton);
-        checkEmailBoxButton.click();
         webElementWaitToBeClickable(checkEmailBoxButton);
         checkEmailBoxButton.click();
         return new EmailBoxPage(driver);
